@@ -1,0 +1,135 @@
+/* --- Alpha Campaigns v3.0 Core Styles --- */
+:root {
+    --bg-color: #040607;
+    --neon-green: #00ffa3;
+    --neon-gold: #ffcc00;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-main: #ffffff;
+    --text-dim: #9499a1;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+    background: var(--bg-color);
+    background-image: radial-gradient(circle at 80% 0%, #00ffa310, transparent 40%), 
+                      radial-gradient(circle at 20% 100%, #00ffa305, transparent 40%);
+    color: var(--text-main);
+    padding-bottom: 120px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container { padding: 20px; max-width: 500px; margin: auto; }
+
+/* --- Header & Avatar --- */
+.main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.avatar { 
+    width: 44px; height: 44px; border-radius: 50%; 
+    border: 1.5px solid var(--neon-green); 
+    box-shadow: 0 0 15px rgba(0, 255, 163, 0.2); 
+    overflow: hidden; background: #111;
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.brand h1 { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.5px; }
+.brand h1 span { color: var(--neon-green); }
+
+.social-btns { display: flex; gap: 10px; }
+.social-pill { 
+    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; 
+    border-radius: 50%; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+    color: white; transition: 0.3s; 
+}
+.social-pill:active { transform: scale(0.9); border-color: var(--neon-green); }
+
+/* --- Category Info Panel --- */
+.category-info-panel { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+#page-display-title { font-size: 1.6rem; font-weight: 700; }
+#page-subtitle { font-size: 0.75rem; color: var(--text-dim); }
+.stat-card { padding: 10px 18px; border-radius: 18px; text-align: right; }
+
+.stat-card span { font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+.stat-card h3 { color: var(--neon-green); font-size: 1.2rem; }
+
+/* --- Search Container --- */
+.search-container { 
+    display: flex; align-items: center; gap: 12px; padding: 14px 20px; 
+    border-radius: 100px; margin-bottom: 25px; 
+}
+.search-container input { background: none; border: none; color: #fff; width: 100%; outline: none; font-size: 0.9rem; }
+.search-container svg { color: var(--text-dim); }
+
+/* --- Offer Cards --- */
+.offer-container { display: flex; flex-direction: column; gap: 12px; }
+.offer-card {
+    background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); padding: 18px; border-radius: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: 0.2s; cursor: pointer; animation: slideIn 0.4s ease-out backwards;
+}
+.offer-card:active { transform: scale(0.97); }
+@keyframes slideIn { from { opacity: 0; transform: translateY(15px); } }
+
+.offer-card.premium { border-color: rgba(255, 204, 0, 0.3); background: rgba(255, 204, 0, 0.02); }
+
+.offer-info h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+.offer-info p { font-size: 0.75rem; color: var(--text-dim); }
+
+.reward-badge { 
+    padding: 6px 14px; border-radius: 12px; font-weight: 700; 
+    font-size: 0.8rem; border: 1px solid rgba(0, 255, 163, 0.2); 
+}
+.badge-green { background: rgba(0, 255, 163, 0.1); color: var(--neon-green); }
+.badge-gold { background: rgba(255, 204, 0, 0.1); color: var(--neon-gold); border-color: rgba(255, 204, 0, 0.2); }
+
+/* --- Modals & Popups --- */
+.modal-overlay, .video-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
+    display: none; z-index: 1000; 
+}
+.modal-overlay { align-items: flex-end; }
+.video-overlay { align-items: center; justify-content: center; }
+
+.modal-content { 
+    background: #0a0c0e; width: 100%; max-width: 500px; padding: 40px 25px 30px; 
+    border-radius: 35px 35px 0 0; border: 1px solid var(--glass-border); border-bottom: none;
+    position: relative; animation: modalUp 0.3s cubic-bezier(0.25, 1, 0.5, 1); margin: auto; margin-bottom: 0;
+}
+@keyframes modalUp { from { transform: translateY(100%); } }
+
+.video-window { width: 90%; max-width: 450px; border-radius: 25px; overflow: hidden; position: relative; border: 1px solid var(--glass-border); }
+#tutorial-video { width: 100%; display: block; background: #000; }
+
+.modal-handle { width: 40px; height: 4px; background: #333; border-radius: 10px; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); }
+.modal-close, .video-close { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #555; font-size: 1.8rem; z-index: 10; cursor: pointer; }
+
+/* --- Buttons & Instructions --- */
+.instr-step { 
+    padding: 12px 15px; border-radius: 15px; background: rgba(255,255,255,0.02); 
+    margin: 10px 0; font-size: 0.85rem; border-left: 3px solid var(--neon-green); color: #ccc; 
+}
+.instr-step.gold-border { border-left-color: var(--neon-gold); }
+
+.action-group { display: flex; flex-direction: column; gap: 10px; margin-top: 25px; }
+.btn { width: 100%; padding: 18px; border-radius: 20px; border: none; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.95rem; }
+.btn-claim { background: var(--neon-green); color: #000; box-shadow: 0 10px 20px rgba(0, 255, 163, 0.15); }
+.btn-buy { background: var(--neon-gold); color: #000; box-shadow: 0 10px 20px rgba(255, 204, 0, 0.15); }
+.btn-sec { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid var(--glass-border); }
+
+/* --- Bottom Nav --- */
+.bottom-navbar { 
+    position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); 
+    width: 90%; max-width: 420px; border-radius: 100px; 
+    display: flex; justify-content: space-around; padding: 10px; z-index: 999;
+}
+.nav-btn { color: #555; cursor: pointer; transition: 0.3s; padding: 10px 15px; border-radius: 20px; text-align: center; }
+.nav-btn p { font-size: 0.75rem; font-weight: 600; }
+.nav-btn.active { color: var(--neon-green); background: rgba(0, 255, 163, 0.05); }
+.premium-nav.active { color: var(--neon-gold); background: rgba(255, 204, 0, 0.05); }
+
+/* --- Extra --- */
+.toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); padding: 10px 20px; border-radius: 50px; font-size: 0.8rem; display: none; z-index: 1001; }
+.glass { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Alpha Campaigns | Rewards Hub</title>
+    <!-- Premium Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Brand Header -->
+        <header class="main-header">
+            <div class="brand">
+                <div class="avatar">
+                    <img src="alphacampaignslogo.png" alt="Logo">
+                </div>
+                <h1>Alpha <span>Campaigns</span></h1>
+            </div>
+            <div class="social-btns">
+                <a href="https://chat.whatsapp.com/LCrmwR70LVI1riW87ajA1t?mode=gi_t" class="social-pill wa">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.938 3.659 1.432 5.633 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                </a>
+                <a href="https://t.me/+5_SjSpa-Jb8zMDQ1" class="social-pill tg">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.14-.26.26-.53.26l.204-3.08 5.612-5.07c.244-.216-.054-.337-.374-.124l-6.93 4.36-2.98-.93c-.648-.202-.66-.648.135-.958l11.666-4.49c.54-.197 1.01.12.83.95z"/></svg>
+                </a>
+            </div>
+        </header>
+
+        <!-- Stats Section -->
+        <div class="category-info-panel">
+            <div class="title-group">
+                <h2 id="page-display-title">UPI Loot</h2>
+                <p id="page-subtitle">Small loots, big savings</p>
+            </div>
+            <div class="stat-card glass">
+                <span>Available</span>
+                <h3 id="category-earnings-display">₹0.00</h3>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container glass">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="text" id="offerSearch" placeholder="Search for offers..." onkeyup="filterBySearch()">
+        </div>
+
+        <!-- Offer List -->
+        <main id="offer-list" class="offer-container"></main>
+    </div>
+
+    <!-- Instruction Modal -->
+    <div id="modal-overlay" class="modal-overlay" onclick="closeOutside(event)">
+        <div class="modal-content glass">
+            <div class="modal-handle"></div>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-content-body"></div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="video-overlay" class="video-overlay" onclick="closeVideoOutside(event)">
+        <div class="video-window glass">
+            <button class="video-close" onclick="closeVideo()">&times;</button>
+            <video id="tutorial-video" controls playsinline></video>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-navbar glass">
+        <div class="nav-btn active" onclick="switchSection('upi', this)"><p>UPI</p></div>
+        <div class="nav-btn" onclick="switchSection('bank', this)"><p>Bank</p></div>
+        <div class="nav-btn" onclick="switchSection('crypto', this)"><p>Crypto</p></div>
+        <div class="nav-btn premium-nav" onclick="switchSection('special', this)"><p>Special</p></div>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast glass">Copied to Clipboard!</div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
