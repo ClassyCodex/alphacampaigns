@@ -1,0 +1,168 @@
+/* --- Alpha Master v7.1 - Mobile Interface Fix --- */
+
+/* 1. FORCE HIDE ALL DESKTOP-ONLY ELEMENTS */
+@media (max-width: 1023px) {
+    .pc-sidebar, .pc-extra {
+        display: none !important; /* Removes Sidebar and Activity feed from Phone */
+    }
+
+    .app-shell {
+        flex-direction: column;
+        display: block; /* Ensure it stacks vertically */
+    }
+
+    .viewport {
+        padding: 15px 15px 110px; /* Large bottom padding for Floating Nav */
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* 2. MOBILE HEADER REPAIR */
+    .mobile-top {
+        display: flex !important;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+        align-items: center;
+    }
+
+    .m-brand-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .m-brand-wrapper h1 {
+        font-size: 1.8rem;
+        letter-spacing: -1px;
+    }
+
+    .logo-img {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+    }
+
+    /* 3. SEARCH & TICKER */
+    .search-engine {
+        width: 100%;
+        padding: 5px 15px;
+        border-radius: 15px;
+    }
+
+    .search-engine input {
+        width: 100%;
+        background: none;
+        border: none;
+        color: #fff;
+        padding: 10px 0;
+        outline: none;
+    }
+
+    .global-ticker {
+        margin-bottom: 25px;
+        font-size: 0.75rem;
+    }
+
+    /* 4. HERO SECTION FIX */
+    .section-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    #display-title {
+        font-size: 2.2rem;
+        margin-bottom: 5px;
+    }
+
+    .reward-card {
+        display: inline-block;
+        padding: 12px 25px;
+        margin-top: 15px;
+    }
+
+    /* 5. SUB-NAV PILLS */
+    .sub-nav-container {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        scrollbar-width: none;
+    }
+    .sub-nav-container::-webkit-scrollbar { display: none; }
+
+    .sub-pill {
+        padding: 10px 18px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 50px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        white-space: nowrap;
+        color: var(--text-muted);
+    }
+    .sub-pill.active { background: #fff; color: #000; }
+
+    /* 6. BENTO GRID (One Column on Mobile) */
+    .bento-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .offer-card h3 { font-size: 1.05rem; }
+
+    /* 7. FLOATING PILL NAVIGATION */
+    .mobile-floating-nav {
+        position: fixed;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 94%;
+        max-width: 480px;
+        padding: 8px;
+        display: flex;
+        justify-content: space-around;
+        z-index: 2000;
+        box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
+    }
+
+    .m-nav-item {
+        flex: 1;
+        text-align: center;
+        padding: 8px 0;
+        font-size: 0.65rem;
+        font-weight: 900;
+        color: var(--text-muted);
+    }
+
+    .m-nav-item.active {
+        color: var(--neon-green);
+        background: rgba(255,255,255,0.06);
+        border-radius: 15px;
+    }
+
+    /* 8. MODAL WINDOW (Bottom Sheet) */
+    .modal-overlay { align-items: flex-end; }
+    .modal-window {
+        width: 100%;
+        border-radius: 30px 30px 0 0;
+        padding: 40px 25px 50px;
+        border-bottom: none;
+    }
+
+    .modal-handle {
+        width: 45px;
+        height: 5px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* 9. VIDEO PLAYER */
+    .video-window { width: 92%; border-radius: 20px; }
+}

@@ -1,0 +1,174 @@
+/* --- Alpha Master v7.1 - UI & Button Legibility Fix --- */
+
+:root {
+    --bg-deep: #050505;
+    --accent-purple: #9d50bb;
+    --accent-cyan: #00f2fe;
+    --neon-green: #00ffa3;
+    --neon-gold: #ffcc00;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-pure: #ffffff;
+    --text-muted: #949494;
+}
+
+/* --- Base Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-pure);
+    font-family: 'Inter', sans-serif; /* Primary clean font for UI */
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* THEME FONT - ONLY for Branding, Section Titles, and Rewards */
+.theme-font {
+    font-family: 'Poppins', sans-serif !important;
+    font-style: italic;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* --- Cinematic Background --- */
+.ambient-glow-engine {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+}
+
+.blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.12;
+}
+
+.purple { background: var(--accent-purple); top: -10%; right: -10%; }
+.cyan { background: var(--accent-cyan); bottom: -10%; left: -10%; }
+
+/* --- BUTTON FIX: Solid & Highly Readable --- */
+.btn-main-action, .btn-sidebar-wa, .btn-track, .btn-video, .video-close-x {
+    font-family: 'Inter', sans-serif !important; /* Force clean font on buttons */
+    font-style: normal !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px !important;
+    border-radius: 14px !important;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    text-align: center;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-main-action { 
+    background: var(--neon-green) !important; 
+    color: #000 !important; 
+    box-shadow: 0 10px 20px rgba(0, 255, 163, 0.2);
+}
+
+.btn-main-action:active { transform: scale(0.96); }
+
+.btn-track { 
+    background: rgba(0, 242, 254, 0.15) !important; 
+    color: var(--accent-cyan) !important; 
+    border: 1.5px solid var(--accent-cyan) !important;
+    margin-bottom: 10px;
+}
+
+.btn-video { 
+    background: rgba(157, 80, 187, 0.15) !important; 
+    color: var(--accent-purple) !important; 
+    border: 1.5px solid var(--accent-purple) !important;
+}
+
+/* --- Bento Grid UI --- */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+}
+
+.offer-card {
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s;
+}
+
+.reward-badge {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--neon-green);
+    margin-top: 15px;
+}
+.reward-badge.gold { color: var(--neon-gold); }
+
+/* --- AD POPUP --- */
+.ad-popup {
+    position: fixed;
+    bottom: 110px;
+    left: 15px;
+    padding: 10px 18px;
+    z-index: 2500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 50px;
+    transform: translateX(-150%);
+    transition: transform 0.5s ease;
+}
+.ad-popup.active { transform: translateX(0); }
+.ad-badge { background: var(--accent-purple); color: #fff; font-size: 0.6rem; font-weight: 900; padding: 4px 10px; border-radius: 20px; }
+
+/* --- MODAL ENGINE --- */
+.modal-overlay, .video-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    z-index: 3000;
+    backdrop-filter: blur(25px);
+}
+
+.modal-step {
+    padding: 15px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 15px;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    border-left: 4px solid var(--neon-green);
+}
+.warning-step { border-left-color: #ff3e3e; color: #ff9d9d; }
+
+/* --- TOAST --- */
+.toast-glow {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 30px;
+    background: var(--accent-purple);
+    border-radius: 50px;
+    font-weight: 800;
+    display: none;
+    z-index: 4000;
+}
