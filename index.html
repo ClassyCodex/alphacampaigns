@@ -3,147 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Alpha Campaigns | Premium Loot & SMM Hub</title>
+    <title>Alpha Master | Premium Loot Hub</title>
     
-    <!-- Premium Cinematic Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Syncopate:wght@700&family=Poppins:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Poppins:ital,wght@1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
-    <!-- Modular CSS Imports -->
     <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 1023px)">
-    <link rel="stylesheet" href="desktop.css" media="screen and (min-width: 1024px)">
-
-    <!-- PWA & Mobile Optimization -->
-    <meta name="theme-color" content="#050505">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="desktop.css">
 </head>
-<body class="dark-theme">
+<body>
 
-    <!-- Cinematic Background Effects -->
-    <div class="ambient-glow-engine">
-        <div class="blob purple"></div>
-        <div class="blob cyan"></div>
+    <div class="glow-engine">
+        <div class="blob p-blob"></div>
+        <div class="blob c-blob"></div>
+        <div class="mesh-overlay"></div>
     </div>
 
-    <div class="app-shell">
-        
-        <!-- [PC ONLY] Sidebar Navigation -->
-        <aside class="pc-sidebar glass">
-            <div class="sidebar-header">
-                <img src="alphacampaignslogo.png" alt="Logo" class="logo-img">
-                <h1 class="theme-font">ALPHA<span>.</span></h1>
+    <div class="app-container">
+        <header class="main-header glass">
+            <div class="brand" id="admin-trigger-1">
+                <img src="alphacampaignslogo.png" alt="Logo" class="logo">
+                <h1 class="theme-font" id="admin-trigger-2">ALPHA<span>.</span></h1>
             </div>
-            <nav class="side-menu">
-                <div class="nav-item active" data-main="upi">⚡ UPI Loots</div>
-                <div class="nav-item" data-main="finance">🏦 Finance Hub</div>
-                <div class="nav-item" data-main="smm">🚀 SMM Panel</div>
-                <div class="nav-item" data-main="refer">💎 Refer & Earn</div>
-                <div class="nav-item" data-main="gaming">🎮 Gaming Hub</div>
-                <div class="nav-item" data-main="special">🔥 Coupons & More</div>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="system-status">
-                    <span class="status-dot"></span> Tracking Online
-                </div>
-                <button class="btn-sidebar-wa" onclick="window.open('https://wa.me/916372132268')">Support Chat</button>
+            <div class="search-bar glass">
+                <input type="text" id="mainSearch" placeholder="Find loots..." onkeyup="filterLoot()">
+                <span>🔍</span>
             </div>
-        </aside>
+        </header>
 
-        <!-- MAIN VIEWPORT -->
-        <main class="viewport">
-            
-            <!-- [MOBILE ONLY] Top Header -->
-            <header class="mobile-top">
-                <div class="m-brand-wrapper">
-                    <img src="alphacampaignslogo.png" alt="Logo" class="logo-img">
-                    <h1 class="theme-font">ALPHA</h1>
-                </div>
-                <div class="search-engine glass">
-                    <input type="text" id="offerSearch" placeholder="Search for loots or services..." onkeyup="handleSearch()">
-                    <span class="search-icon">🔍</span>
-                </div>
-            </header>
+        <nav class="cat-bar glass" id="catBar">
+            <button class="nav-btn active" onclick="switchTab('upi')">UPI</button>
+            <button class="nav-btn" onclick="switchTab('finance')">BANK</button>
+            <button class="nav-btn" onclick="switchTab('smm')">SMM</button>
+            <button class="nav-btn" onclick="switchTab('refer')">REFER</button>
+            <button class="nav-btn" onclick="switchTab('gaming')">PLAY</button>
+            <button class="nav-btn" onclick="switchTab('special')">MORE</button>
+        </nav>
 
-            <!-- Ticker Announcement -->
-            <div class="global-ticker glass">
-                <marquee behavior="scroll" direction="left">
-                    🚀 NEW: 55+ Rummy/Yono Apps Verified | 🏦 Jio Finance & Airtel Bank LIVE | 💎 Premium SMM Services Working 100%
-                </marquee>
+        <main>
+            <div id="lootGrid" class="bento-grid">
+                <!-- Data from Supabase -->
             </div>
-
-            <!-- Header Titles & Dynamic Stats -->
-            <section class="section-header">
-                <div class="text-group">
-                    <h2 id="display-title" class="theme-font">UPI LOOTS</h2>
-                    <p id="display-subtitle">Small work, instant verified cashback.</p>
-                </div>
-                <div class="stats-pill glass">
-                    <span class="label">REWARD POOL</span>
-                    <h3 id="reward-pool-display">₹0.00</h3>
-                </div>
-            </section>
-
-            <!-- Sub-Navigation Pill Bar -->
-            <div id="sub-nav-bar" class="sub-nav-container">
-                <!-- Injected via logic.js based on section -->
-            </div>
-
-            <!-- The Bento Content Grid -->
-            <div id="bento-container" class="bento-grid">
-                <!-- Cards Injected Here -->
-            </div>
-
         </main>
     </div>
 
-    <!-- [NEW] Ad-Style Social Proof Popup -->
-    <div id="ad-popup" class="ad-popup glass" onclick="openPopupOffer()">
-        <div class="ad-badge" id="ad-label">MOST ACTIVE</div>
-        <div class="ad-content">
-            <p id="ad-text">User @Rahul claimed ₹100 Reward!</p>
+    <!-- Modal Sheets -->
+    <div id="taskModal" class="overlay modal-overlay" onclick="closeModals(event)">
+        <div class="modal-sheet glass">
+            <div class="handle"></div>
+            <div id="modalContent"></div>
         </div>
     </div>
 
-    <!-- [FIXED] Full Screen Modal Engine -->
-    <div id="modal-overlay" class="modal-overlay" onclick="closeOutsideModal(event)">
-        <div class="modal-window glass">
-            <div class="modal-handle"></div>
-            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
-            <div id="modal-body"></div>
+    <div id="videoModal" class="overlay" onclick="closeModals(event)">
+        <div class="modal-sheet glass" style="max-width:800px; margin:auto;">
+            <video id="player" controls playsinline style="width:100%; border-radius:15px;"></video>
+            <button class="btn-primary" style="margin-top:15px;" onclick="closeVideo()">CLOSE</button>
         </div>
     </div>
 
-    <!-- [FIXED] Cinematic Video Player Overlay -->
-    <div id="video-overlay" class="video-overlay" onclick="closeOutsideVideo(event)">
-        <div class="video-window glass">
-            <video id="tutorial-player" controls playsinline></video>
-            <button class="video-close-x" onclick="closeVideo()">CLOSE PLAYER</button>
+    <!-- Admin Panel -->
+    <div id="adminPortal" class="overlay admin-overlay">
+        <div class="admin-panel glass">
+            <h2 class="theme-font">COMMAND CENTER</h2>
+            <div class="admin-form">
+                <input type="text" id="taskTitle" placeholder="Title">
+                <input type="number" id="taskReward" placeholder="Reward">
+                <select id="taskCat">
+                    <option value="upi">UPI</option>
+                    <option value="finance">Finance</option>
+                    <option value="smm">SMM</option>
+                    <option value="refer">Refer</option>
+                    <option value="gaming">Gaming</option>
+                    <option value="special">Special</option>
+                </select>
+                <input type="text" id="taskLink" placeholder="Link">
+                <input type="text" id="taskVideo" placeholder="Video (e.g. airtel.mp4)">
+                <textarea id="taskSteps" placeholder="Instructions (Enter per line)"></textarea>
+                <button class="btn-primary" onclick="saveTask()">PUSH TO CLOUD</button>
+                <button class="btn-primary" style="background:none; color:#fff;" onclick="closeAdmin()">CANCEL</button>
+            </div>
         </div>
     </div>
 
-    <!-- [MOBILE ONLY] Floating Pill Navigation -->
-    <nav class="mobile-floating-nav glass">
-        <div class="m-nav-item active" data-main="upi">UPI</div>
-        <div class="m-nav-item" data-main="finance">Bank</div>
-        <div class="m-nav-item" data-main="smm">SMM</div>
-        <div class="m-nav-item" data-main="refer">Refer</div>
-        <div class="m-nav-item" data-main="gaming">Play</div>
-        <div class="m-nav-item" data-main="special">More</div>
-    </nav>
+    <div id="toast" class="toast">Success!</div>
 
-    <!-- UI Feedback Toast -->
-    <div id="toast" class="toast-glow">Copied to Clipboard!</div>
-
-    <!-- LOAD DATA FILES FIRST -->
-    <script src="db-upi.js"></script>
-    <script src="db-finance.js"></script>
-    <script src="db-refer.js"></script>
-    <script src="db-smm.js"></script>
-    <script src="db-gaming.js"></script>
-    <script src="db-special.js"></script>
-    
-    <!-- LOAD THE BRAIN LAST -->
     <script src="logic.js"></script>
 </body>
 </html>
